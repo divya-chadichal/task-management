@@ -1,21 +1,38 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
-
+  
+  <mat-card class="containerPane" color="accent">
+    <mat-toolbar color="primary" class="header">
+      <mat-toolbar-row>
+        <span class="headerName">KARYA</span>
+        <span class="spacer"></span>
+        <mat-slide-toggle color="accent" class="themeButton" (click)="onSetTheme()">Theme</mat-slide-toggle>
+      </mat-toolbar-row>
+    </mat-toolbar>
+    <mat-card cdkDropList cdkDropListOrientation="horizontal" class="example-list col-sm-12 col-md-6" (cdkDropListDropped)="dropSide($event)">
+    <mat-card class="taskCard" color="accent" *ngFor = "let allList of allTasksList" cdkDrag>
+        <div><p class="taskName">{{allList.listName}} <span class="glyphicon glyphicon-trash deleteWholeTask" id="deleteTask" (click)="openDialog(allList.listId, 'deleteTask', allList)"></span></p>
+        </div>
+        <div *ngIf="allList.values.length>0">
+        <div 
+          cdkDropList 
+          id="{{allList.listId}}" 
+          [cdkDropListData]="allList.values"
+          [cdkDropListConnectedTo]="connectedList" 
+          class="task-list" 
+          (cdkDropListDropped)="onDrop($event)">
+          <div class="task-block" *ngFor="let item of allList.values" cdkDrag>{{item.name}}
+            &nbsp; <div class="buttonClass"><button class="glyphicon glyphicon-pencil editTask" (click)="openDialog(allList.listId, 'edit', item)"></button>
+            <button class="glyphicon glyphicon-eye-open viewTask" (click)="openDialog(allTasksList.listId, 'view', item)"></button>
+            <button class="glyphicon glyphicon-trash deleteTask" (click)="openDialog(allList.listId, 'delete', item)"></button></div>
+          </div>
+        </div>
+        </div>
+      <button class="addTaskButton" (click)="openDialog(allList.listId, 'add')"><span class="glyphicon glyphicon-plus-sign"></span> Add task</button>
+    </mat-card>
+  
+    <div class="createPane">
+      <button class= "btn btn-warning" id="addNewTask" (click)="openDialog('newList', 'addList')">+ Add Task List</button>
+    </div>
+  </mat-card>
+  </mat-card>
 <router-outlet></router-outlet>

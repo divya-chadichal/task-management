@@ -1,0 +1,105 @@
+
+<div class="alert alert-success" [class.visible]="isVisible"> 
+    Task List addedd successfully!
+  </div>
+
+<div *ngIf="action == 'add'">
+    <div class="taskTitle">Add new Task List</div>
+<mat-dialog-content class="mat-typography">
+    <b>Task Name</b>
+    <input type="text" class="form-control" required [(ngModel)]="taskName" #name="ngModel" (keyup)="checkDuplicateName(allTasksList, taskName)">
+    <div *ngIf="name.invalid && clickAdd" class="text text-danger">
+        <div *ngIf="name.errors.required">
+            Name is required.
+        </div>
+    </div>
+    <p *ngIf="isDuplicateName" class="text text-danger">Name already exists!!</p>
+    <b>Description</b>
+    <input type="text" class="form-control" [(ngModel)]="description">
+</mat-dialog-content>
+<br>
+<mat-dialog-actions>
+    <button class="btn btn-success" cdkFocusInitial (click) = "addList(name.valid)" [disabled]="isDuplicateName">Add</button>&nbsp; &nbsp; &nbsp;
+    <button class="btn btn-danger" mat-dialog-close >Cancel</button>
+</mat-dialog-actions>
+</div>
+
+<div *ngIf="action == 'delete'">
+<mat-dialog-content class="mat-typography">
+    Are you sure you want to delete task {{item.name}}?
+</mat-dialog-content>
+<br>
+<mat-dialog-actions>
+    <button class="btn btn-success" cdkFocusInitial (click) = "deleteList()">Delete</button>&nbsp; &nbsp; &nbsp;
+    <button class="btn btn-danger" mat-dialog-close >Cancel</button>
+</mat-dialog-actions>
+</div>
+
+<div *ngIf="action == 'addList'">
+    {{allPList}}
+    <div class="taskTitle">Add new Task</div>
+<mat-dialog-content class="mat-typography">
+   <input  id="tskName" type="text" required class="form-control" [(ngModel)]="listName" #tasknameid="ngModel" (keyup)="checkDuplicateTask(allTasksList, listName)">
+   <p *ngIf="isDuplicateTask" class="text text-danger">Task already exists!!</p>
+   <div *ngIf="tasknameid.invalid && clickAddTask" class="text text-danger">
+        <div *ngIf="tasknameid.errors.required">
+            Task Name is required.
+        </div>
+    </div>
+</mat-dialog-content>
+<br>
+<mat-dialog-actions>
+    <button class="btn btn-success" id="addNewTaskP" cdkFocusInitial (click) = "addTask(tasknameid.valid)" [disabled]="isDuplicateTask">Add</button>&nbsp; &nbsp; &nbsp;
+    <button class="btn btn-danger" mat-dialog-close id="closeAddTask">Cancel</button>
+</mat-dialog-actions>
+</div>
+
+<div *ngIf="action == 'edit'">
+    <div class="taskTitle">Edit Task List</div>
+<mat-dialog-content class="mat-typography">
+    <br>
+    <b>List Name :</b>
+    <br>
+   <input type="text" class="form-control" [(ngModel)]="editList.name">
+   <br>
+   <b>Task Description : </b>
+   <br>
+   <input type="text" class="form-control" [(ngModel)]="editList.description">
+</mat-dialog-content>
+<br>
+<mat-dialog-actions>
+    <button class="btn btn-success" cdkFocusInitial (click) = "editListValue()">Update</button>&nbsp; &nbsp; &nbsp;
+    <button class="btn btn-danger" mat-dialog-close >Cancel</button>
+</mat-dialog-actions>
+</div>
+
+<div *ngIf="action == 'view'">
+    <div class="taskTitle">View Task List</div>
+<mat-dialog-content class="mat-typography" style="pointer-events: none; opacity: 0.5;">
+    <br>
+    <b>List Name :</b>
+    <br>
+   <input type="text" class="form-control" [(ngModel)]="editList.name">
+   <br>
+   <b>Task Description : </b>
+   <br>
+   <input type="text" class="form-control" [(ngModel)]="editList.description">
+</mat-dialog-content>
+<br>
+<mat-dialog-actions>
+    <button class="btn btn-danger" mat-dialog-close >Cancel</button>
+</mat-dialog-actions>
+</div>
+
+<div *ngIf="action == 'deleteTask'">
+<mat-dialog-content class="mat-typography">
+    Are you sure you want to delete task {{item.listName}}?
+</mat-dialog-content>
+<br>
+<mat-dialog-actions>
+    <button class="btn btn-success" cdkFocusInitial (click) = "deleteTask()">Delete</button> &nbsp; &nbsp; &nbsp;
+    <button class="btn btn-danger" mat-dialog-close >Cancel</button>
+</mat-dialog-actions>
+</div>
+
+

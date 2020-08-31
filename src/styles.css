@@ -1,1 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
+
+.cdk-overlay-backdrop.cdk-overlay-backdrop-showing {
+    opacity: 1;
+    background: rgba(0, 0, 0, 0.90)
+}
+
+.cdk-overlay-pane{
+    width: auto;
+    height: auto;
+}
+
+mat-toolbar-row.mat-toolbar-row{
+    text-align: center;
+}
+
+mat-card.mat-card.taskCard{
+    margin-top: 25px;
+    width: 20%;
+    height: 70%;
+    float: left;
+    background-color: #CAE1F9;
+    margin-left: 15px;
+    border:none;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.30);
+}

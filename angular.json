@@ -23,6 +23,7 @@
               "src/assets"
             ],
             "styles": [
+              "src/custom-theme.scss",
               "src/styles.css"
             ],
             "scripts": []
@@ -74,6 +75,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
+            "codeCoverage": true,
             "main": "src/test.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
@@ -114,6 +116,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "task-management"
+    }
+  },
+  "defaultProject": "task-management",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }
